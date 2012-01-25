@@ -15,7 +15,7 @@ require 'albacore'
 @env_buildversion = "0.1.0" + (ENV['env_buildnumber'].to_s.empty? ? "" : ".#{ENV['env_buildnumber'].to_s}")
 @env_buildconfigname = ENV['env_buildconfigname'].to_s.empty? ? "Release" : ENV['env_buildconfigname'].to_s
 @env_buildname = "#{@env_solutionname}-v#{@env_buildversion}-#{@env_buildconfigname}"
-@env_buildfolderpath = @env_buildname
+@env_buildfolderpath = 'build'
 #--------------------------------------
 #optional if no remote nuget actions should be performed
 @env_nugetPublishApiKey = ENV['env_nugetPublishApiKey']
@@ -28,15 +28,15 @@ liteCqrsOutputPath = "#{@env_buildfolderpath}/#{@env_projectnameLiteCqrs}"
 #--------------------------------------
 # Albacore flow controlling tasks
 #--------------------------------------
-task :ci => [:buildIt, :copyIt, :testIt, :zipIt, :packIt, :publishIt]
+task :ci => [:buildIt, :copyLiteCqrs, :testIt, :zipIt, :packIt, :publishIt]
 
-task :local => [:buildIt, :copyIt, :testIt, :zipIt, :packIt]
+task :local => [:buildIt, :copyLiteCqrs, :testIt, :zipIt, :packIt]
 #--------------------------------------
 task :testIt => [:unittests]
 
 task :zipIt => [:zipLiteCqrs]
 
-task :packIt => [:packLiteCqrs]
+task :packIt => [:packLiteCqrsNuGet]
 
 task :publishIt => [:publishLiteCqrsNuGet]
 #--------------------------------------
@@ -62,7 +62,7 @@ msbuild :buildIt => [:ensureCleanBuildFolder, :versionIt] do |msb|
 	msb.solution = "#{@env_solutionfolderpath}/#{@env_solutionname}.sln"
 end
 
-task :copyIt do
+task :copyLiteCqrs do
 	FileUtils.mkdir_p(liteCqrsOutputPath)
 	FileUtils.cp_r(FileList["#{@env_solutionfolderpath}/Projects/#{@env_projectnameLiteCqrs}/bin/#{@env_buildconfigname}/**"], liteCqrsOutputPath)
 end
@@ -75,11 +75,11 @@ end
 
 zip :zipLiteCqrs do |zip|
 	zip.directories_to_zip liteCqrsOutputPath
-	zip.output_file = "#{@env_buildname}-#{@env_projectnameLiteCqrsAdmin}.zip"
+	zip.output_file = "#{@env_buildname}.zip"
 	zip.output_path = @env_buildfolderpath
 end
 
-exec :packLiteCqrs do |cmd|
+exec :packLiteCqrsNuGet do |cmd|
 	cmd.command = "NuGet.exe"
 	cmd.parameters = "pack #{@env_projectnameLiteCqrs}.nuspec -version #{@env_buildversion} -basepath #{liteCqrsOutputPath} -outputdirectory #{@env_buildfolderpath}"
 end
