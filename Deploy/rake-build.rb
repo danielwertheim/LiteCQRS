@@ -30,7 +30,7 @@ task :ci => [:installNuGetPackages, :buildIt, :copyLiteCqrs, :testIt, :zipIt, :p
 
 task :local => [:installNuGetPackages, :buildIt, :copyLiteCqrs, :testIt, :zipIt, :packIt]
 #--------------------------------------
-task :testIt => [:unittests]
+task :testIt => [:unittests, :specifications]
 
 task :zipIt => [:zipLiteCqrs]
 
@@ -73,6 +73,12 @@ nunit :unittests do |nunit|
 	nunit.command = "nunit-console.exe"
 	nunit.options "/framework=v4.0.30319","/xml=#{@env_buildfolderpath}/NUnit-Report-#{@env_solutionname}-UnitTests.xml"
 	nunit.assemblies FileList["#{@env_solutionfolderpath}/Tests/#{@env_solutionname}.**UnitTests/bin/#{@env_buildconfigname}/#{@env_solutionname}.**UnitTests.dll"]
+end
+
+mspec :specifications do |mspec|
+	mspec.command = "mspec-clr4.exe"
+	mspec.options "--teamcity --xml=#{@env_buildfolderpath}/MSpec-Report-#{@env_solutionname}-Specifications.xml"
+	mspec.assemblies FileList["#{@env_solutionfolderpath}/Tests/#{@env_solutionname}.**Specifications/bin/#{@env_buildconfigname}/#{@env_solutionname}.**Specifications.dll"]
 end
 
 zip :zipLiteCqrs do |zip|
