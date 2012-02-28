@@ -10,7 +10,7 @@
     <description>
 		LiteCQRS is a small convention-based CQRS framework that differs from others by NOT using interfaces or base-classes or attributes for defining command- and event handlers. Instead, it relies on method signatures and the namespace of the class, containing the method.
 	</description>
-	<projectUrl>http://github.com/danielwertheim/litecqrs</projectUrl>
+	<projectUrl>https://github.com/danielwertheim/litecqrs</projectUrl>
 	<licenseUrl>https://github.com/danielwertheim/litecqrs/blob/master/Source/License-LiteCQRS.txt</licenseUrl>
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
 	<tags>CQRS</tags>
