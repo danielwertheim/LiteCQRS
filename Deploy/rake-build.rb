@@ -10,17 +10,15 @@ require 'albacore'
 # Environment vars
 #--------------------------------------
 @env_solutionname = 'LiteCqrs'
-@env_projectnameLiteCqrs = 'LiteCqrs'
 @env_solutionfolderpath = "../Source"
-@env_buildversion = "0.1.0" + (ENV['env_buildnumber'].to_s.empty? ? "" : ".#{ENV['env_buildnumber'].to_s}")
+
+@env_projectnameLiteCqrs = 'LiteCqrs'
+
+@env_buildfolderpath = 'build'
+@env_version = "0.1.0"
+@env_buildversion = @env_version + (ENV['env_buildnumber'].to_s.empty? ? "" : ".#{ENV['env_buildnumber'].to_s}")
 @env_buildconfigname = ENV['env_buildconfigname'].to_s.empty? ? "Release" : ENV['env_buildconfigname'].to_s
 @env_buildname = "#{@env_solutionname}-v#{@env_buildversion}-#{@env_buildconfigname}"
-@env_buildfolderpath = 'build'
-#--------------------------------------
-#optional if no remote nuget actions should be performed
-@env_nugetPublishApiKey = ENV['env_nugetPublishApiKey']
-@env_nugetPublishUrl = ENV['env_nugetPublishUrl']
-@env_nugetSourceUrl = ENV['env_nugetSourceUrl']
 #--------------------------------------
 # Reusable vars
 #--------------------------------------
@@ -28,26 +26,30 @@ liteCqrsOutputPath = "#{@env_buildfolderpath}/#{@env_projectnameLiteCqrs}"
 #--------------------------------------
 # Albacore flow controlling tasks
 #--------------------------------------
-task :ci => [:buildIt, :copyLiteCqrs, :testIt, :zipIt, :packIt, :publishIt]
+task :ci => [:installNuGetPackages, :buildIt, :copyLiteCqrs, :testIt, :zipIt, :packIt]
 
-task :local => [:buildIt, :copyLiteCqrs, :testIt, :zipIt, :packIt]
+task :local => [:installNuGetPackages, :buildIt, :copyLiteCqrs, :testIt, :zipIt, :packIt]
 #--------------------------------------
 task :testIt => [:unittests]
 
 task :zipIt => [:zipLiteCqrs]
 
 task :packIt => [:packLiteCqrsNuGet]
-
-task :publishIt => [:publishLiteCqrsNuGet]
 #--------------------------------------
 # Albacore tasks
 #--------------------------------------
+task :installNuGetPackages do
+	FileList["#{@env_solutionfolderpath}/**/packages.config"].each { |filepath|
+		sh "NuGet.exe i #{filepath} -o #{@env_solutionfolderpath}/packages"
+	}
+end
+
 assemblyinfo :versionIt do |asm|
 	sharedAssemblyInfoPath = "#{@env_solutionfolderpath}/SharedAssemblyInfo.cs"
 
 	asm.input_file = sharedAssemblyInfoPath
 	asm.output_file = sharedAssemblyInfoPath
-	asm.version = @env_buildversion
+	asm.version = @env_version
 	asm.file_version = @env_buildversion  
 end
 
@@ -68,7 +70,7 @@ task :copyLiteCqrs do
 end
 
 nunit :unittests do |nunit|
-	nunit.command = "#{@env_solutionfolderpath}/packages/NUnit.2.5.10.11092/tools/nunit-console.exe"
+	nunit.command = "nunit-console.exe"
 	nunit.options "/framework=v4.0.30319","/xml=#{@env_buildfolderpath}/NUnit-Report-#{@env_solutionname}-UnitTests.xml"
 	nunit.assemblies FileList["#{@env_solutionfolderpath}/Tests/#{@env_solutionname}.**UnitTests/bin/#{@env_buildconfigname}/#{@env_solutionname}.**UnitTests.dll"]
 end
@@ -81,10 +83,5 @@ end
 
 exec :packLiteCqrsNuGet do |cmd|
 	cmd.command = "NuGet.exe"
-	cmd.parameters = "pack #{@env_projectnameLiteCqrs}.nuspec -version #{@env_buildversion} -basepath #{liteCqrsOutputPath} -outputdirectory #{@env_buildfolderpath}"
-end
-
-exec :publishLiteCqrsNuGet do |cmd|
-	cmd.command = "NuGet.exe"
-	cmd.parameters = "push #{@env_buildfolderpath}/#{@env_projectnameLiteCqrs}.#{@env_buildversion}.nupkg #{@env_nugetPublishApiKey} -src #{@env_nugetPublishUrl}"
+	cmd.parameters = "pack #{@env_projectnameLiteCqrs}.nuspec -version #{@env_version} -basepath #{liteCqrsOutputPath} -outputdirectory #{@env_buildfolderpath}"
 end
