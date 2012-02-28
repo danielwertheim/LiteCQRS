@@ -3,3 +3,6 @@ LiteCQRS is a small convention-based CQRS framework that differs from others by 
 
 ## License
 License: [The MIT License (MIT)](http://www.opensource.org/licenses/mit-license.php)
+
+## SemVer for versioning
+LiteCQRS uses [SemVer](http://semver.org) for versioning.
