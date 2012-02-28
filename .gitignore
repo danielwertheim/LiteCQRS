@@ -7,7 +7,7 @@
 [D]ebug/
 [Tt]est[Rr]esult/
 [Tt]emp/
-#[Pp]ackages/
+[Pp]ackages/
 ![Pp]ackages/repositories.config
 *.vspscc
 *.vssscc
