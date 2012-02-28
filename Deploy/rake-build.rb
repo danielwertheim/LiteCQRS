@@ -9,7 +9,7 @@ require 'albacore'
 #--------------------------------------
 # Environment vars
 #--------------------------------------
-@env_solutionname = 'LiteCqrs'
+@env_solutionname = 'LiteCQRS'
 @env_solutionfolderpath = "../Source"
 
 @env_projectnameLiteCqrs = 'LiteCqrs'
