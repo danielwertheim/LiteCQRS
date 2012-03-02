@@ -6,3 +6,10 @@ License: [The MIT License (MIT)](http://www.opensource.org/licenses/mit-license.
 
 ## SemVer for versioning
 LiteCQRS uses [SemVer](http://semver.org) for versioning.
+
+## Contribute
+Line feeds setting should be `core.autocrlf=false`.
+
+Unit-tests are written using `NUnit` and integration tests ans specifications are written using [Machine Specifications](https://github.com/machine/machine.specifications).
+
+Pull request should be against the **Develop branch**
