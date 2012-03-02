@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LiteCqrs.Eventing;
 
 namespace LiteCqrs.Domain
@@ -19,16 +20,17 @@ namespace LiteCqrs.Domain
 
 		public void Store<T>(T aggregateRoot) where T : IAggregateRoot
 		{
-			var storedEvents = StoreEvents(aggregateRoot.DequeueEvents());
-			var appliedEvents = ApplyEvents(aggregateRoot, storedEvents);
+		    var aggregateRootEvents = aggregateRoot.DequeueEvents().ToArray();
+			var storedEvents = StoreEvents(aggregateRootEvents).ToArray();
+			var appliedEvents = ApplyEvents(aggregateRoot, storedEvents).ToArray();
 			PublishEvents(appliedEvents);
 		}
 
 		public T GetById<T>(Guid aggregateRootId) where T : IAggregateRoot
 		{
 			var aggregateRoot = (T)Activator.CreateInstance(typeof(T), true);
-			var storedEvents = GetEventsById(aggregateRootId);
-			ApplyEvents(aggregateRoot, storedEvents);
+			var storedEvents = GetEventsById(aggregateRootId).ToArray();
+			var appliedEvents = ApplyEvents(aggregateRoot, storedEvents).ToArray();
 
 			return aggregateRoot;
 		}
