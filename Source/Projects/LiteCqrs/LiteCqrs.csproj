@@ -76,6 +76,7 @@
     <Compile Include="Eventing\IEventHandlerResolver.cs" />
     <Compile Include="Eventing\IEventHandler.cs" />
     <Compile Include="Eventing\IEventPublisher.cs" />
+    <Compile Include="Eventing\InProcAsyncEventPublisher.cs" />
     <Compile Include="Eventing\InProcEventPublisher.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="ICqrsRuntime.cs" />
