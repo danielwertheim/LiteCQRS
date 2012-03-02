@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,7 +16,7 @@ namespace LiteCqrs.Domain
 			var eventType = typeof(IEvent);
 			var aggregateRootType = aggregateRoot.GetType();
 			var eventAppliers = aggregateRootType.GetMethods(EventApplierBindingFlags)
-				.Where(m => m.Name.StartsWith("on"))
+				.Where(m => m.Name.StartsWith("on", StringComparison.OrdinalIgnoreCase))
 				.Select(m => new
 				{
 					Method = m,
