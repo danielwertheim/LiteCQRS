@@ -8,13 +8,21 @@ namespace LiteCqrs
 {
 	public class CqrsRuntimeBuilder
 	{
-		public CommandHandlerContainerFactory CommandHandlerContainerFactory;
-		public EventHandlerContainerFactory EventHandlerContainerFactory;
-
-		public CqrsRuntimeBuilder()
+        public CommandHandlerContainerFactory CommandHandlerContainerFactory { get; set; }
+        public EventHandlerContainerFactory EventHandlerContainerFactory { get; set; }
+	    public Func<CommandHandlers, ICommandBus> CommandBusFactory { get; set; }
+	    public Func<EventHandlers, IEventPublisher> EventPublisherFactory { get; set; }
+        public Func<IEventStore> EventStoreFactory { get; set; }
+        public Func<IEventApplier> EventApplierFactory { get; set; }
+ 
+	    public CqrsRuntimeBuilder()
 		{
 			CommandHandlerContainerFactory = Activator.CreateInstance;
 			EventHandlerContainerFactory = Activator.CreateInstance;
+            CommandBusFactory = commandHandlers => new InProcCommandBus(commandHandlers, new CommandHandlerInvoker(CommandHandlerContainerFactory));
+            EventPublisherFactory = eventHandlers => new InProcEventPublisher(eventHandlers, new EventHandlerInvoker(EventHandlerContainerFactory));
+            EventStoreFactory = () => new InMemoryEventStore();
+            EventApplierFactory = () => new EventApplier();
 		}
 
 		public ICqrsRuntime Build(
@@ -26,10 +34,10 @@ namespace LiteCqrs
 
 			return new CqrsRuntime
 			(
-				OnCreateCommandBus(commandHandlers),
-				OnCreateEventStore(),
-				OnCreateEventApplier(),
-				OnCreateEventPublisher(eventHandlers)
+				CommandBusFactory.Invoke(commandHandlers),
+				EventStoreFactory.Invoke(),
+				EventApplierFactory.Invoke(),
+                EventPublisherFactory.Invoke(eventHandlers)
 			);
 		}
 
@@ -42,21 +50,6 @@ namespace LiteCqrs
 			return commandHandlers;
 		}
 
-		protected virtual ICommandBus OnCreateCommandBus(CommandHandlers commandHandlers)
-		{
-			return new InProcCommandBus(commandHandlers, new CommandHandlerInvoker(CommandHandlerContainerFactory));
-		}
-
-		protected virtual IEventStore OnCreateEventStore()
-		{
-			return new InMemoryEventStore();
-		}
-
-		protected virtual IEventApplier OnCreateEventApplier()
-		{
-			return new EventApplier();
-		}
-
 		protected virtual EventHandlers OnResolveEventHandlers(AssemblyScanConfig[] assembliesWithEventHandlers)
 		{
 			var eventHandlers = new EventHandlers();
@@ -64,11 +57,6 @@ namespace LiteCqrs
 				eventHandlers.Register(new AssemblyEventHandlerResolver(assembly).Resolve());
 
 			return eventHandlers;
-		}
-
-		protected virtual IEventPublisher OnCreateEventPublisher(EventHandlers eventHandlers)
-		{
-			return new InProcEventPublisher(eventHandlers, new EventHandlerInvoker(EventHandlerContainerFactory));
 		}
 	}
 }
