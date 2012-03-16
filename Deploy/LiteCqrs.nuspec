@@ -3,7 +3,7 @@
   <metadata>
     <id>LiteCQRS</id>    
     <title>LiteCQRS</title>
-	<version>0.0.0.0</version>
+	<version>$version$</version>
 	<authors>danielwertheim</authors>
 	<copyright>Daniel Wertheim</copyright>
 	<summary>A small convention-based CQRS infrastructure.</summary>
@@ -15,7 +15,7 @@
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
 	<tags>CQRS</tags>
 	<dependencies>
-      <dependency id="Ensure.That" version="0.6.0" />
+      <dependency id="Ensure.That" version="0.7.0" />
 	</dependencies>
   </metadata>
   <files>
