@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using LiteCqrs.Eventing;
 
-namespace LiteCqrs.Domain
+namespace LiteCqrs.EventStores
 {
 	public interface IEventStore
 	{
