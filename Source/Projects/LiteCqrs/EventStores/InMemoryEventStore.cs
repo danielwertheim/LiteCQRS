@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LiteCqrs.Eventing;
 
-namespace LiteCqrs.Domain.EventStores
+namespace LiteCqrs.EventStores
 {
 	public class InMemoryEventStore : IEventStore
 	{

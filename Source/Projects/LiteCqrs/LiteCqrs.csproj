@@ -61,11 +61,11 @@
     <Compile Include="Domain\AggregateRoot.cs" />
     <Compile Include="Domain\DomainRepository.cs" />
     <Compile Include="Domain\EventApplier.cs" />
-    <Compile Include="Domain\EventStores\InMemoryEventStore.cs" />
+    <Compile Include="EventStores\InMemoryEventStore.cs" />
     <Compile Include="Domain\IAggregateRoot.cs" />
     <Compile Include="Domain\IDomainRepository.cs" />
     <Compile Include="Domain\IEventApplier.cs" />
-    <Compile Include="Domain\IEventStore.cs" />
+    <Compile Include="EventStores\IEventStore.cs" />
     <Compile Include="Eventing\AssemblyEventHandlerResolver.cs" />
     <Compile Include="Eventing\EventHandlerContainerFactory.cs" />
     <Compile Include="Eventing\EventHandlerInvoker.cs" />

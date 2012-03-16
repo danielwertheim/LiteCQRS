@@ -1,6 +1,7 @@
 using EnsureThat;
 using LiteCqrs.Commanding;
 using LiteCqrs.Domain;
+using LiteCqrs.EventStores;
 using LiteCqrs.Eventing;
 
 namespace LiteCqrs

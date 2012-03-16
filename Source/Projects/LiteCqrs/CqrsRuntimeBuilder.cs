@@ -1,7 +1,7 @@
 using System;
 using LiteCqrs.Commanding;
 using LiteCqrs.Domain;
-using LiteCqrs.Domain.EventStores;
+using LiteCqrs.EventStores;
 using LiteCqrs.Eventing;
 
 namespace LiteCqrs
