@@ -11,7 +11,7 @@ namespace LiteCqrs.Domain
 		protected const BindingFlags EventApplierBindingFlags =
 			BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Instance;
 
-		public virtual IEnumerable<IEvent> Apply<T>(T aggregateRoot, IEnumerable<IEvent> events) where T : IAggregateRoot
+		public virtual void Apply<T>(T aggregateRoot, IEnumerable<IEvent> events) where T : IAggregateRoot
 		{
 			var eventType = typeof(IEvent);
 			var aggregateRootType = aggregateRoot.GetType();
@@ -30,8 +30,6 @@ namespace LiteCqrs.Domain
 				MethodInfo eventApplier;
 				if (eventAppliers.TryGetValue(e.GetType(), out eventApplier))
 					eventApplier.Invoke(aggregateRoot, new object[] { e });
-
-				yield return e;
 			}
 		}
 	}

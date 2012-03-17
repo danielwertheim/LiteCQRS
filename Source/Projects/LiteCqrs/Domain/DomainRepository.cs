@@ -22,28 +22,28 @@ namespace LiteCqrs.Domain
 		public void Store<T>(T aggregateRoot) where T : IAggregateRoot
 		{
 		    var aggregateRootEvents = aggregateRoot.DequeueEvents().ToArray();
-			var storedEvents = StoreEvents(aggregateRootEvents).ToArray();
-			var appliedEvents = ApplyEvents(aggregateRoot, storedEvents).ToArray();
-			PublishEvents(appliedEvents);
+			StoreEvents(aggregateRootEvents);
+            ApplyEvents(aggregateRoot, aggregateRootEvents);
+            PublishEvents(aggregateRootEvents);
 		}
 
 		public T GetById<T>(Guid aggregateRootId) where T : IAggregateRoot
 		{
+            var storedEvents = GetEventsById(aggregateRootId).ToArray();
 			var aggregateRoot = (T)Activator.CreateInstance(typeof(T), true);
-			var storedEvents = GetEventsById(aggregateRootId).ToArray();
-			var appliedEvents = ApplyEvents(aggregateRoot, storedEvents).ToArray();
+			ApplyEvents(aggregateRoot, storedEvents);
 
 			return aggregateRoot;
 		}
 
-		protected virtual IEnumerable<IEvent> StoreEvents(IEnumerable<IEvent> events)
+		protected virtual void StoreEvents(IEnumerable<IEvent> events)
 		{
-			return EventStore.Insert(events);
+			EventStore.Insert(events);
 		}
 
-		protected virtual IEnumerable<IEvent> ApplyEvents<T>(T aggregateRoot, IEnumerable<IEvent> events) where T : IAggregateRoot
+		protected virtual void ApplyEvents<T>(T aggregateRoot, IEnumerable<IEvent> events) where T : IAggregateRoot
 		{
-			return EventApplier.Apply(aggregateRoot, events);
+			EventApplier.Apply(aggregateRoot, events);
 		}
 
 		protected virtual void PublishEvents(IEnumerable<IEvent> events)
