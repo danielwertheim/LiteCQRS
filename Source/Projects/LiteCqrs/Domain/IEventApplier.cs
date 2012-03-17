@@ -8,6 +8,6 @@ namespace LiteCqrs.Domain
     /// </summary>
 	public interface IEventApplier
 	{
-		IEnumerable<IEvent> Apply<T>(T aggregateRoot, IEnumerable<IEvent> events) where T : IAggregateRoot;
+		void Apply<T>(T aggregateRoot, IEnumerable<IEvent> events) where T : IAggregateRoot;
 	}
 }

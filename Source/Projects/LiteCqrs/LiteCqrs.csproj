@@ -61,6 +61,8 @@
     <Compile Include="Domain\AggregateRoot.cs" />
     <Compile Include="Domain\DomainRepository.cs" />
     <Compile Include="Domain\EventApplier.cs" />
+    <Compile Include="EventStores\CommittedEvent.cs" />
+    <Compile Include="EventStores\ICommittedEvent.cs" />
     <Compile Include="EventStores\InMemoryEventStore.cs" />
     <Compile Include="Domain\IAggregateRoot.cs" />
     <Compile Include="Domain\IDomainRepository.cs" />
