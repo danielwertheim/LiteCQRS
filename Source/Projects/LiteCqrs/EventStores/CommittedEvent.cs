@@ -6,10 +6,7 @@ namespace LiteCqrs.EventStores
     [Serializable]
     public class CommittedEvent : ICommittedEvent
     {
-        public Guid Id
-        {
-            get { return AggregateRootId; }
-        }
+        public Guid Id { get; set; }
 
         public Guid AggregateRootId
         {
