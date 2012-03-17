@@ -38,7 +38,7 @@ namespace LiteCqrs.Domain
 
 		protected virtual void StoreEvents(IEnumerable<IEvent> events)
 		{
-			EventStore.Insert(events);
+			EventStore.Store(events);
 		}
 
 		protected virtual void ApplyEvents<T>(T aggregateRoot, IEnumerable<IEvent> events) where T : IAggregateRoot

@@ -6,7 +6,7 @@ namespace LiteCqrs.EventStores
 {
 	public interface IEventStore
 	{
-		void Insert(IEnumerable<IEvent> events);
+		void Store(IEnumerable<IEvent> events);
 		IEnumerable<IEvent> GetById(Guid aggregateRootId);
         IEnumerable<IEvent> GetByCommitId(Guid commitId);
 	}

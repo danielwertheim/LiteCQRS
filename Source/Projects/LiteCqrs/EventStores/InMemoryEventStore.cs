@@ -15,7 +15,7 @@ namespace LiteCqrs.EventStores
             _store = new ConcurrentQueue<ICommittedEvent>();
         }
 
-        public void Insert(IEnumerable<IEvent> events)
+        public void Store(IEnumerable<IEvent> events)
         {
             var commitId = Guid.NewGuid();
 
