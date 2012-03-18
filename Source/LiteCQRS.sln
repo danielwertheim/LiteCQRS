@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteCqrs.Specifications", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteCqrs.UnitTests", "Tests\LiteCqrs.UnitTests\LiteCqrs.UnitTests.csproj", "{6A6D8387-7AB4-4A63-9A36-E26D49F926DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteCqrs.TestScenario", "Tests\LiteCqrs.TestScenario\LiteCqrs.TestScenario.csproj", "{37B3CF63-E415-416B-B9DD-869177DA0272}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6A6D8387-7AB4-4A63-9A36-E26D49F926DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A6D8387-7AB4-4A63-9A36-E26D49F926DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A6D8387-7AB4-4A63-9A36-E26D49F926DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B3CF63-E415-416B-B9DD-869177DA0272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B3CF63-E415-416B-B9DD-869177DA0272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B3CF63-E415-416B-B9DD-869177DA0272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B3CF63-E415-416B-B9DD-869177DA0272}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,5 +46,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FB6D06CE-8268-4F3D-B749-F9DBCC9DFEEA} = {981BFDAE-FFF8-4775-8A4F-D885642541C2}
 		{6A6D8387-7AB4-4A63-9A36-E26D49F926DA} = {981BFDAE-FFF8-4775-8A4F-D885642541C2}
+		{37B3CF63-E415-416B-B9DD-869177DA0272} = {981BFDAE-FFF8-4775-8A4F-D885642541C2}
 	EndGlobalSection
 EndGlobal

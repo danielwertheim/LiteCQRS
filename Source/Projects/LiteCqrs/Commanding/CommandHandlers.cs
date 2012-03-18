@@ -32,7 +32,11 @@ namespace LiteCqrs.Commanding
 
     	public virtual ICommandHandler Get(Type commandType)
     	{
-    		return Registrations[commandType];
+    	    ICommandHandler handler;
+    		if(!Registrations.TryGetValue(commandType, out handler) || handler == null)
+                throw Exceptions.CanNotLocateCommandHandler(commandType);
+
+    	    return handler;
     	}
     }
 }

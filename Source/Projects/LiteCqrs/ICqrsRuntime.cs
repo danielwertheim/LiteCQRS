@@ -7,10 +7,10 @@ namespace LiteCqrs
 {
 	public interface ICqrsRuntime
 	{
-		ICommandBus CommandBus { get; }
-		IEventStore EventStore { get; }
-		IEventApplier EventApplier { get; }
-		IEventPublisher EventPublisher { get; }
+        ICommandBus CommandBus { get; set; }
+        IEventStore EventStore { get; set; }
+        IEventApplier EventApplier { get; set; }
+        IEventPublisher EventPublisher { get; set; }
 		IDomainRepository GetDomainRepository();
 	}
 }

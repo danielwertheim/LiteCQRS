@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6A6D8387-7AB4-4A63-9A36-E26D49F926DA}</ProjectGuid>
+    <ProjectGuid>{37B3CF63-E415-416B-B9DD-869177DA0272}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LiteCqrs.UnitTests</RootNamespace>
-    <AssemblyName>LiteCqrs.UnitTests</AssemblyName>
+    <RootNamespace>LiteCqrs.TestScenario</RootNamespace>
+    <AssemblyName>LiteCqrs.TestScenario</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,15 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="NCore">
-      <HintPath>..\..\packages\NCore.0.28.0\lib\net40\NCore.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,7 +39,19 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CommandHandlers\AllCommandHandlers.cs" />
+    <Compile Include="Events\MySubEvent.cs" />
+    <Compile Include="SubDenormalizers\SubA\AllSubDenormalizers.cs" />
+    <Compile Include="Domain\MyAggregate.cs" />
+    <Compile Include="Events\MyAggregateCreatedEvent.cs" />
+    <Compile Include="SubCommandHandlers\SubA\AllSubCommandHandlers.cs" />
+    <Compile Include="Commands\MyCommand.cs" />
+    <Compile Include="Commands\MySubCommand.cs" />
+    <Compile Include="Denormalizers\AllDenormalizers.cs" />
+    <Compile Include="EventHandlers\AllEventHandlers.cs" />
+    <Compile Include="Events\MyEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubEventHandlers\SubA\AllSubEventHandlers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Projects\LiteCqrs\LiteCqrs.csproj">
@@ -56,9 +59,7 @@
       <Name>LiteCqrs</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
