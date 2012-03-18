@@ -36,7 +36,12 @@ namespace LiteCqrs.Eventing
 
 		public IEnumerable<IEventHandler> Get(Type eventType)
 		{
-			return Registrations[eventType];
+		    IList<IEventHandler> handlers;
+            
+            if (!Registrations.TryGetValue(eventType, out handlers) || handlers == null)
+                return new IEventHandler[0];
+
+		    return handlers;
 		}
     }
 }

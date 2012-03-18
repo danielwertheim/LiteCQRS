@@ -34,6 +34,9 @@
     <Reference Include="Machine.Specifications">
       <HintPath>..\..\packages\Machine.Specifications.0.5.3.0\lib\Machine.Specifications.dll</HintPath>
     </Reference>
+    <Reference Include="NCore">
+      <HintPath>..\..\packages\NCore.0.28.0\lib\net40\NCore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,9 +45,21 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AssemblyContext.cs" />
+    <Compile Include="ContextCleanup.cs" />
+    <Compile Include="Specs\SendingCommands.cs" />
+    <Compile Include="ITestContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpecificationBase.cs" />
+    <Compile Include="TestConstants.cs" />
+    <Compile Include="TestContext.cs" />
+    <Compile Include="TestContextFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LiteCqrs.TestScenario\LiteCqrs.TestScenario.csproj">
+      <Project>{37B3CF63-E415-416B-B9DD-869177DA0272}</Project>
+      <Name>LiteCqrs.TestScenario</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Projects\LiteCqrs\LiteCqrs.csproj">
       <Project>{A5CBB3D0-20A8-4698-8DBC-661BBB7C5E77}</Project>
       <Name>LiteCqrs</Name>

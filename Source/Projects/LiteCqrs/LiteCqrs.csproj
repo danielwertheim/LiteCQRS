@@ -36,6 +36,9 @@
     <Reference Include="EnsureThat">
       <HintPath>..\..\packages\Ensure.That.0.6.0\lib\net40\EnsureThat.dll</HintPath>
     </Reference>
+    <Reference Include="NCore">
+      <HintPath>..\..\packages\NCore.0.28.0\lib\net40\NCore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
