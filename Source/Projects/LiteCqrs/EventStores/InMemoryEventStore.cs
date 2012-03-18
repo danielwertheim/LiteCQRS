@@ -16,7 +16,7 @@ namespace LiteCqrs.EventStores
             _store = new ConcurrentQueue<CommittedEvent>();
         }
 
-        public void Store(IEnumerable<IEvent> events)
+        public void Store(Guid aggregateRootId, IEnumerable<IEvent> events)
         {
             var commitId = Guid.NewGuid();
             var ts = SysDateTime.Now;
@@ -30,9 +30,9 @@ namespace LiteCqrs.EventStores
             return _store.Where(e => e.AggregateRootId == aggregateRootId).Select(e => e.Event);
         }
 
-        public IEnumerable<IEvent> GetByCommitId(Guid commitId)
+        public IEnumerable<IEvent> GetByCommitId(Guid aggregateRootId, Guid commitId)
         {
-            return _store.Where(ce => ce.CommitId == commitId).Select(e => e.Event);
+            return _store.Where(ce => ce.CommitId == commitId && ce.AggregateRootId == aggregateRootId).Select(e => e.Event);
         }
 
         [Serializable]
