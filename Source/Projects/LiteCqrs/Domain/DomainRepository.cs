@@ -19,9 +19,9 @@ namespace LiteCqrs.Domain
             EventPublisher = eventPublisher;
         }
 
-        public void Store<T>(T aggregateRoot) where T : IAggregateRoot
+        public virtual void Store<T>(T aggregateRoot) where T : IAggregateRoot
         {
-            var aggregateRootEvents = aggregateRoot.DequeueEvents().ToArray();
+            var aggregateRootEvents = aggregateRoot.GetUncommittedEvents().ToArray();
             if (!aggregateRootEvents.Any())
                 return;
 
@@ -30,7 +30,7 @@ namespace LiteCqrs.Domain
             PublishEvents(aggregateRootEvents);
         }
 
-        public T GetById<T>(Guid aggregateRootId) where T : IAggregateRoot
+        public virtual T GetById<T>(Guid aggregateRootId) where T : IAggregateRoot
         {
             var storedEvents = GetEventsById(aggregateRootId).ToArray();
             var aggregateRoot = (T)Activator.CreateInstance(typeof(T), true);

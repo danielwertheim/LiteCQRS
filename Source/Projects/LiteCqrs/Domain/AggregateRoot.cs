@@ -7,21 +7,21 @@ namespace LiteCqrs.Domain
 {
 	public class AggregateRoot : IAggregateRoot
 	{
-		private readonly ConcurrentQueue<IEvent> _queue = new ConcurrentQueue<IEvent>();
+        protected readonly ConcurrentQueue<IEvent> Queue = new ConcurrentQueue<IEvent>();
 
 		protected Guid Id;
 
-		protected void Raise(IEvent e)
+		protected virtual void Raise(IEvent e)
 		{
-			_queue.Enqueue(e);
+			Queue.Enqueue(e);
 		}
 
-		public IEnumerable<IEvent> DequeueEvents()
+		public virtual IEnumerable<IEvent> GetUncommittedEvents()
 		{
-			while (_queue.Count > 0)
+            while (Queue.Count > 0)
 			{
 				IEvent e;
-				if (_queue.TryDequeue(out e))
+				if (Queue.TryDequeue(out e))
 					yield return e;
 			}
 		}

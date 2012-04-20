@@ -5,6 +5,6 @@ namespace LiteCqrs.Domain
 {
 	public interface IAggregateRoot
 	{
-		IEnumerable<IEvent> DequeueEvents();
+		IEnumerable<IEvent> GetUncommittedEvents();
 	}
 }
