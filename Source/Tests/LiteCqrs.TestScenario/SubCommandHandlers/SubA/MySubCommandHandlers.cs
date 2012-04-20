@@ -6,14 +6,14 @@ using LiteCqrs.TestScenario.Domain;
 
 namespace LiteCqrs.TestScenario.SubCommandHandlers.SubA
 {
-    public class AllSubCommandHandlers
+    public class MySubCommandHandlers
     {
         private readonly IDomainRepository _domainRepository;
 
         [ThreadStatic]
         public static Action<ICommand> OnHandlerInvocation;
 
-        public AllSubCommandHandlers(IDomainRepository domainRepository)
+        public MySubCommandHandlers(IDomainRepository domainRepository)
         {
             _domainRepository = domainRepository;
         }

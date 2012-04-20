@@ -22,10 +22,10 @@ namespace LiteCqrs.Specifications.Specs
         Establish context = () =>
         {
             TestContext = TestContextFactory.CreateDefault();
-            AllCommandHandlers.OnHandlerInvocation = cmd => _interceptedCommand = cmd;
+            MyCommandHandlers.OnHandlerInvocation = cmd => _interceptedCommand = cmd;
             MyAggregate.OnEventApplierInvocation = e => _interceptedEventApplierEvents.Add(e);
-            AllEventHandlers.OnHandlerInvocation = e => _interceptedEventHandlerEvents.Add(e);
-            AllDenormalizers.OnHandlerInvocation = e => _interceptedDenormalizerEvents.Add(e);
+            MyEventHandlers.OnHandlerInvocation = e => _interceptedEventHandlerEvents.Add(e);
+            MyDenormalizers.OnHandlerInvocation = e => _interceptedDenormalizerEvents.Add(e);
             _initialCommand = new MyCommand(Guid.NewGuid(), "Test");
         };
 
@@ -57,10 +57,10 @@ namespace LiteCqrs.Specifications.Specs
         Establish context = () =>
         {
             TestContext = TestContextFactory.CreateDefault();
-            AllSubCommandHandlers.OnHandlerInvocation = cmd => _interceptedCommand = cmd;
+            MySubCommandHandlers.OnHandlerInvocation = cmd => _interceptedCommand = cmd;
             MyAggregate.OnEventApplierInvocation = e => _interceptedEventApplierEvents.Add(e);
-            AllSubEventHandlers.OnHandlerInvocation = e => _interceptedEventHandlerEvents.Add(e);
-            AllSubDenormalizers.OnHandlerInvocation = e => _interceptedDenormalizerEvents.Add(e);
+            MySubEventHandlers.OnHandlerInvocation = e => _interceptedEventHandlerEvents.Add(e);
+            MySubDenormalizers.OnHandlerInvocation = e => _interceptedDenormalizerEvents.Add(e);
             _initialCommand = new MySubCommand(Guid.NewGuid(), "Test");
         };
 

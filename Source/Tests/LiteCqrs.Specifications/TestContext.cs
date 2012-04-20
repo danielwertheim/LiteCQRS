@@ -17,10 +17,10 @@ namespace LiteCqrs.Specifications
 
         public void Cleanup()
         {
-            AllCommandHandlers.OnHandlerInvocation = null;
-            AllSubCommandHandlers.OnHandlerInvocation = null;
-            AllEventHandlers.OnHandlerInvocation = null;
-            AllDenormalizers.OnHandlerInvocation = null;
+            MyCommandHandlers.OnHandlerInvocation = null;
+            MySubCommandHandlers.OnHandlerInvocation = null;
+            MyEventHandlers.OnHandlerInvocation = null;
+            MyDenormalizers.OnHandlerInvocation = null;
             MyAggregate.OnEventApplierInvocation = null;
         }
     }

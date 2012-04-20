@@ -6,19 +6,19 @@ using LiteCqrs.TestScenario.Domain;
 
 namespace LiteCqrs.TestScenario.CommandHandlers
 {
-    public class AllCommandHandlers
+    public class MyCommandHandlers
     {
         private readonly IDomainRepository _domainRepository;
 
         [ThreadStatic]
         public static Action<ICommand> OnHandlerInvocation;
 
-        public AllCommandHandlers(IDomainRepository domainRepository)
+        public MyCommandHandlers(IDomainRepository domainRepository)
         {
             _domainRepository = domainRepository;
         }
 
-        public void ThisCouldBeNamedWhatEver(MyCommand cmd)
+        public void ThisHandlerMethodCouldBeNamedWhatEver(MyCommand cmd)
         {
             if(OnHandlerInvocation != null)
                 OnHandlerInvocation.Invoke(cmd);

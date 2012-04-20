@@ -2,9 +2,9 @@
 using LiteCqrs.Eventing;
 using LiteCqrs.TestScenario.Events;
 
-namespace LiteCqrs.TestScenario.Denormalizers
+namespace LiteCqrs.TestScenario.EventHandlers
 {
-    public class AllDenormalizers
+    public class MyEventHandlers
     {
         [ThreadStatic]
         public static Action<IEvent> OnHandlerInvocation;

@@ -39,19 +39,19 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CommandHandlers\AllCommandHandlers.cs" />
+    <Compile Include="CommandHandlers\MyCommandHandlers.cs" />
     <Compile Include="Events\MySubEvent.cs" />
-    <Compile Include="SubDenormalizers\SubA\AllSubDenormalizers.cs" />
+    <Compile Include="SubDenormalizers\SubA\MySubDenormalizers.cs" />
     <Compile Include="Domain\MyAggregate.cs" />
     <Compile Include="Events\MyAggregateCreatedEvent.cs" />
-    <Compile Include="SubCommandHandlers\SubA\AllSubCommandHandlers.cs" />
+    <Compile Include="SubCommandHandlers\SubA\MySubCommandHandlers.cs" />
     <Compile Include="Commands\MyCommand.cs" />
     <Compile Include="Commands\MySubCommand.cs" />
-    <Compile Include="Denormalizers\AllDenormalizers.cs" />
-    <Compile Include="EventHandlers\AllEventHandlers.cs" />
+    <Compile Include="Denormalizers\MyDenormalizers.cs" />
+    <Compile Include="EventHandlers\MyEventHandlers.cs" />
     <Compile Include="Events\MyEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubEventHandlers\SubA\AllSubEventHandlers.cs" />
+    <Compile Include="SubEventHandlers\SubA\MySubEventHandlers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Projects\LiteCqrs\LiteCqrs.csproj">

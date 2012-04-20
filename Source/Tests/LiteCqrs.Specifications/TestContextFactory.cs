@@ -19,21 +19,21 @@ namespace LiteCqrs.Specifications
             builder.CommandHandlerContainerFactory = t => Activator.CreateInstance(t, domainRepositoryFn.Invoke());
             builder.EventHandlerContainerFactory = Activator.CreateInstance;
 
-            var commandHandlersConfig = new AssemblyScanConfig(typeof(AllCommandHandlers).Assembly);
-            var subCommandHandlersConfig = new AssemblyScanConfig(typeof (AllSubCommandHandlers).Assembly)
+            var commandHandlersConfig = new AssemblyScanConfig(typeof(MyCommandHandlers).Assembly);
+            var subCommandHandlersConfig = new AssemblyScanConfig(typeof (MySubCommandHandlers).Assembly)
             {
                 NamespaceFilter = n => n.Contains("SubCommandHandlers")
             };
-            var eventHandlersConfig = new AssemblyScanConfig(typeof(AllEventHandlers).Assembly);
-            var subEventHandlersConfig = new AssemblyScanConfig(typeof(AllSubEventHandlers).Assembly)
+            var eventHandlersConfig = new AssemblyScanConfig(typeof(MyEventHandlers).Assembly);
+            var subEventHandlersConfig = new AssemblyScanConfig(typeof(MySubEventHandlers).Assembly)
             {
                 NamespaceFilter = n => n.Contains("SubEventHandlers")
             };
-            var denormalizersConfig = new AssemblyScanConfig(typeof(AllDenormalizers).Assembly)
+            var denormalizersConfig = new AssemblyScanConfig(typeof(MyDenormalizers).Assembly)
             {
                 NamespaceFilter = n => n != null && n.EndsWith("Denormalizers")
             };
-            var subDenormalizersConfig = new AssemblyScanConfig(typeof(AllSubDenormalizers).Assembly)
+            var subDenormalizersConfig = new AssemblyScanConfig(typeof(MySubDenormalizers).Assembly)
             {
                 NamespaceFilter = n => n != null && n.Contains("SubDenormalizers")
             };

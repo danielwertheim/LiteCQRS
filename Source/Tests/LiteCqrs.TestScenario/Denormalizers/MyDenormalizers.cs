@@ -2,20 +2,20 @@
 using LiteCqrs.Eventing;
 using LiteCqrs.TestScenario.Events;
 
-namespace LiteCqrs.TestScenario.SubEventHandlers.SubA
+namespace LiteCqrs.TestScenario.Denormalizers
 {
-    public class AllSubEventHandlers
+    public class MyDenormalizers
     {
         [ThreadStatic]
         public static Action<IEvent> OnHandlerInvocation;
 
-        public void ThisCouldBeNamedWhatEver(MySubEvent e)
+        public void ThisCouldBeNamedWhatEver(MyEvent e)
         {
             if (OnHandlerInvocation != null)
                 OnHandlerInvocation.Invoke(e);
         }
 
-        public void ASecondHandlerForSameEvent(MySubEvent e)
+        public void ASecondHandlerForSameEvent(MyEvent e)
         {
             if (OnHandlerInvocation != null)
                 OnHandlerInvocation.Invoke(e);
